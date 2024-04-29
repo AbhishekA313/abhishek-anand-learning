@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{{title}}{{#if operation}} || {{operation}}{{/if}}</title>
+    </head>
+
+    <body>
+        {{>header}}
+        
+        {{!-- Arithmetic operation begin --}}
+        {{#if canShowForm}}
+            {{>calculateForm}}
+        {{else}}
+            <p>Requested URL is incorrect, endpoint should be like this /api/calculate/:operation</p>
+        {{/if}}
+        {{!-- Arithmetic operation end --}}
+
+        {{>footer}}
+
+        <script src="/js/app.js"></script>
+    </body>
+</html>

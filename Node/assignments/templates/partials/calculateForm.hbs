@@ -1,0 +1,24 @@
+<div class="arithmetic-wrapper">
+    <p>
+        {{#if add}}
+            Addition
+        {{else if subtract}}
+            Subtraction
+        {{else if multiply}}
+            Multiplication
+        {{else if divide}}
+            Division
+        {{else if percentage}}
+            Percentage
+        {{/if}}
+        of field "A" and field "B"
+    </p>
+    <form id="arithmetic" autocomplete="off">
+        <input type="hidden" name="type" value={{operation}} />
+        <input type="text" name="field_A" placeholder="Value A" />
+        <input type="text" name="field_B" placeholder="Value B" />
+        <button>{{operation}}</button>
+    </form>
+
+    <span id="total"></span>
+</div>
