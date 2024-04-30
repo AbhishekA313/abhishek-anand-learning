@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 
-const { OPERATIONS } = require('./utils/constants');
+const userRouter = require('./routes/index');
 
 const app = express();
 
@@ -24,41 +24,7 @@ hbs.registerPartials(partialsPath);
  * Setup static directory to serve
  */
 app.use(express.static(publicPath));
-
-app.get('', (req, res) => {
-    res.render('index', {
-        title: 'Node Exercise',
-        name: 'Abhishek Anand'
-    });
-});
-
-app.get('/api/calculate', (req, res) => {
-    res.render('calculate', {
-        title: 'Calculation',
-        name: 'Abhishek Anand'
-    });
-});
-
-app.get('/api/calculate/:operation', (req, res) => {
-    const { operation } = req.params;
-    const canShowForm = OPERATIONS.includes(operation);
-
-    res.render('calculate', {
-        title: 'Calculation',
-        name: 'Abhishek Anand',
-        operation,
-        canShowForm,
-        [operation]: true
-    });
-});
-
-app.get('*', (req, res) => {
-    res.render('404', {
-        title: '404',
-        name: 'Abhishek Anand',
-        errorMessage: '404, Page Not Found!'
-    });
-});
+app.use(userRouter);
 
 app.listen(3000, () => {
     console.log('Server is up on port 3000.');
