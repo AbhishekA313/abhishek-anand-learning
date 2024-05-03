@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "abhishek",
+    "password": "Test@123",
+    "database": "node_exercise",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "abhishek",
+    "password": "Test@123",
+    "database": "node_exercise",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "abhishek",
+    "password": "Test@123",
+    "database": "node_exercise",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}

@@ -5,6 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "make-model": "npx sequelize-cli model:generate --name User --attributes source:string,account_number:number,first_name:string,last_name:string,customer_number:string,case_reference:string,alert_trigger_date:timestamps,triggered_by_rule:string,record_type:string,notes:string,senior_analyst_user_id:number,investigating_analyst_user_id:number,case_outcome:string,category_of_match:string",
+    "make-seed": "npx sequelize-cli seed:generate --name demo-user",
+    "migrate": "npx sequelize-cli db:migrate",
+    "down": "npx sequelize-cli db:migrate:undo",
+    "seed": "npx sequelize-cli db:seed:all",
+    "undo-seed": "npx sequelize-cli db:seed:undo:all",
     "dev": "nodemon src/app.js -e js,hbs"
   },
   "keywords": [],
@@ -17,5 +23,8 @@
     "pg": "^8.11.5",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
   }
 }
