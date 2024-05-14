@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const sharp = require('sharp');
+// const sharp = require('sharp');
 
 const User = require('../models/user');
 const auth = require('../middleware/auth');
@@ -116,23 +116,23 @@ const upload = multer({
     }
 });
 
-router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
-    try {
-        const buffer = await sharp(req.file.buffer).resize({
-            width: 90,
-            height: 90
-        }).png().toBuffer();
+// router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
+//     try {
+//         const buffer = await sharp(req.file.buffer).resize({
+//             width: 90,
+//             height: 90
+//         }).png().toBuffer();
 
-        req.user.avatar = buffer;
-        await req.user.save();
+//         req.user.avatar = buffer;
+//         await req.user.save();
 
-        res.send(`File uploaded successfully.`);
-    } catch (e) {
-        res.status(400).send(e);
-    }
-}, (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
-})
+//         res.send(`File uploaded successfully.`);
+//     } catch (e) {
+//         res.status(400).send(e);
+//     }
+// }, (error, req, res, next) => {
+//     res.status(400).send({ error: error.message });
+// })
 
 router.delete('/users/me/avatar', auth, async (req, res) => {
     try {
