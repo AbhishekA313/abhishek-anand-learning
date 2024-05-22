@@ -1,0 +1,12 @@
+{{>page_top}}
+    <form action="/users/me/avatar" method="post" id="add-product" class="add-product" enctype="multipart/form-data">
+        <div class="input-row">
+            <label for="product_image" class="input-row__label">Product Image</label>
+            <input type="file" name="product_image" placeholder="Product Image" required />
+        </div>
+
+        <div class="button-row">
+            <button class="add-product__submit">Add Product</button>
+        </div>
+    </form>
+{{>page_bottom}}

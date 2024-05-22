@@ -1,0 +1,43 @@
+{{>page_top}}
+    <div class="my-account">
+        <section class="section-1">
+            <div class="my-account__profile">
+                <img src="{{imageUrl}}" alt="Profile" />
+            </div>
+            
+            <ul class="my-account__list">
+                <li>
+                    <label>Name:</label>
+                    <span>{{user.firstname}} {{user.lastname}}</span>
+                </li>
+
+                <li>
+                    <label>Account Type:</label>
+                    <span>{{user.employment}}</span>
+                </li>
+
+                <li>
+                    <label>Age:</label>
+                    <span>{{user.age}}</span>
+                </li>
+
+                <li>
+                    <label>Email ID:</label>
+                    <span>{{user.email}}</span>
+                    <span class="edit">edit</span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section-2">
+            <div class="section-2__title">
+                <h2>Addresses</h2>
+                <button class="section-2__add-address">Add +</button>
+            </div>
+
+            <div class="section-2__address-form"></div>
+
+            <div class="section-2__addresses"></div>
+        </section>
+    </div>
+{{>page_bottom}}

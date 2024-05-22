@@ -1,0 +1,46 @@
+{{>page_top}}
+    <form action="/users" id="create-form" method="post" class="form create-form" enctype="multipart/form-data">
+        <div class="input-row">
+            <label for="firstname" class="input-row__label">First Name</label>
+            <input type="text" name="firstname" placeholder="First Name" autocomplete="off" required />
+        </div>
+
+        <div class="input-row">
+            <label for="lastname" class="input-row__label">Last Name</label>
+            <input type="text" name="lastname" placeholder="Last Name" autocomplete="off" required />
+        </div>
+
+        <div class="input-row">
+            <label for="avatar" class="input-row__label">Profile Picture</label>
+            <input type="file" name="avatar" placeholder="Profile Picture" autocomplete="off" required />
+        </div>
+
+        <div class="input-row">
+            <label for="age" class="input-row__label">Age</label>
+            <input type="number" name="age" placeholder="Age" autocomplete="off" required />
+        </div>
+
+        <div class="input-row">
+            <label for="email" class="input-row__label">Email</label>
+            <input type="email" name="email" placeholder="Email" autocomplete="off" required />
+        </div>
+
+        <div class="input-row">
+            <label for="password" class="input-row__label">Password</label>
+            <input type="password" name="password" placeholder="Password" autocomplete="off" required />
+        </div>
+
+        <div class="input-row">
+            <label for="employment" class="input-row__label">Employment Type</label>
+            <select name="employment" autocomplete="off" required>
+                <option value="">Please Select</option>
+                <option value="PRIVATE">PRIVATE</option>
+                <option value="PUBLIC">PUBLIC</option>
+            </select>
+        </div>
+
+        <div class="button-row">
+            <button class="create-form_submit">Submit</button>
+        </div>
+    </form>
+{{>page_bottom}}
