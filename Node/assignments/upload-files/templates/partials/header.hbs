@@ -1,24 +1,26 @@
 <div class="logo">
-    <a href="/">Uploads</a>
+    <a href="/">Node.js</a>
 </div>
 
 <ul class="main-nav">
     {{#if isLoggedIn}}
-        <li>
-            <a href="/uploads">Upload Files</a>
-        </li>
+        {{#if isAdmin}}
+            <li>
+                <a href="/create-category">Create Category</a>
+            </li>
 
-        <li>
-            <a href="/create-category">Create Category</a>
-        </li>
+            <li>
+                <a href="/create-product">Create Product</a>
+            </li>
+        {{else}}
+            <li>
+                <a href="/cake">Cakes</a>
+            </li>
 
-        <li>
-            <a href="/create-product">Create Product</a>
-        </li>
-    {{else}}
-        <li>
-            <a href="/">Home</a>
-        </li>
+            <li>
+                <a href="/cart">Cart</a>
+            </li>
+        {{/if}}
     {{/if}}
 </ul>
 

@@ -1,0 +1,30 @@
+{{>page_top}}
+    <div class="order-wrapper">
+        <div id="print-invoice">Print</div>
+
+        <input type="hidden" id="order_id" value="{{params.id}}" />
+
+        <div id="order-container">
+            <table id="cart-items">
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Product Price</th>
+                    <th>Product QTY</th>
+                </tr>
+            </table>
+            
+            <div id="order-address-wrapper">
+                <div class="billing-address">
+                    <h2>Billing Address</h2>
+                    <div id="billing-address"></div>
+                </div>
+
+                <div class="shipping-address">
+                    <h2>Shipping Address</h2>
+                    <div id="shipping-address"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{>page_bottom}}

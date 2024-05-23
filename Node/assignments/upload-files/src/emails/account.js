@@ -11,6 +11,32 @@ const sendWelcomeEmail = (email, name) => {
     });
 }
 
+const sendUpdateEmail = (email, name) => {
+    sgmail.send({
+        to: email,
+        from: 'abhishek.anand@tothenew.com',
+        subject: 'Updated email address',
+        text: `Hi ${name},
+            Your email address has been updated, please verify by clicking on below link.
+            This link will be expire after 10 minutes.
+            <button type="button">Verify Email</button>
+        `
+    });
+}
+
+const sendPlaceOrderEmail = (email, name) => {
+    sgmail.send({
+        to: email,
+        from: 'abhishek.anand@tothenew.com',
+        subject: 'Thanks for order placing!',
+        text: `Hi ${name},
+            <p>Your order has been placed, you can download invoice from your my account page by clicking on view order button.</p>
+        `
+    });
+}
+
 module.exports = {
-    sendWelcomeEmail
+    sendWelcomeEmail,
+    sendUpdateEmail,
+    sendPlaceOrderEmail
 }

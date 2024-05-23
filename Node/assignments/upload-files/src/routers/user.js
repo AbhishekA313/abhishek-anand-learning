@@ -4,8 +4,9 @@ const sharp = require('sharp');
 const LocalStorage = require('node-localstorage').LocalStorage;
 
 const User = require('../models/user');
+const Address = require('../models/address');
 const { auth } = require('../middleware/auth');
-const { sendWelcomeEmail }  = require('../emails/account');
+const { sendWelcomeEmail, sendUpdateEmail }  = require('../emails/account');
 
 const router = new express.Router();
 localStorage = new LocalStorage('./scratch');
@@ -65,52 +66,33 @@ router.post('/users/logoutAll', auth, async (req, res) => {
     }
 })
 
-const _upload = multer({
-    // dest: 'avatars',
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        console.log(file, "11111111111")
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('Please upload an image.'));
-        }
+router.post('/users/address/add', auth, async (req, res) => {
+    const address = new Address(req.body);
 
-        cb(undefined, true);
-    }
-});
-
-router.post('/users/me/avatar', auth, _upload.single('avatar'), async (req, res) => {
-    console.log(req, "_______")
-    res.send(`File uploaded successfully.`);
-    return;
     try {
-        const buffer = await sharp(req.file.buffer).resize({
-            width: 90,
-            height: 90
-        }).png().toBuffer();
-
-        req.user.avatar = buffer;
-        await req.user.save();
-
-        res.send(`File uploaded successfully.`);
+        address.email = req.user.email;
+        await address.save();
+        res.send({ address });
     } catch (e) {
         res.status(400).send(e);
     }
-}, (error, req, res, next) => {
-    res.status(400).send({ error: error.message });
 })
 
-router.get('/users/:id/avatar', async (req, res) => {
+router.patch('/users/update', auth, async (req, res) => {
+    const updates = Object.keys(req.body);
+    const allowedUpdates = ['email'];
+
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
+
+    if (!isValidOperation) {
+        return res.status(400).send({error: 'Invalid updates!'});
+    }
+
     try {
-        const user = await User.findById(req.params.id);
-
-        if (!user || !user.avatar) {
-            throw new Error();
-        }
-
-        res.set('Content-Type', 'image/png');
-        res.send(user.avatar);
+        updates.forEach(update => req.user[update] = req.body[update]);
+        await req.user.save();
+        sendUpdateEmail(req.user.email, req.user.firstname);
+        res.send(req.user);
     } catch (e) {
         res.status(400).send(e);
     }

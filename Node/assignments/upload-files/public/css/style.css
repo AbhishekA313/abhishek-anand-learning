@@ -82,6 +82,7 @@
     width: 250px;
     padding: 15px;
     border-radius: 5px;
+    z-index: 1;
 }
 
 .header .user-links .account-nav.visible {
@@ -111,16 +112,6 @@
     margin-top: 20px;
     display: inline-block;
     width: 100%;
-}
-
-.container p {
-    border: 1px dashed #080;
-    width: fit-content;
-    margin: 20% auto;
-    padding: 20px 60px;
-    background: #0088000a;
-    border-radius: 5px;
-    font-weight: 600;
 }
 
 .container .error {
@@ -211,6 +202,7 @@ footer {
 .my-account {
     width: 85%;
     margin: 0 auto;
+    position: relative;
 }
 
 .section-1 {
@@ -244,6 +236,23 @@ footer {
     font-weight: 600;
 }
 
+.my-account__list .edit {
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.my-account__list .input-email {
+    display: none;
+}
+
+.my-account__list .input-email input {
+    height: 40px;
+    padding: 10px;
+    width: 40%;
+    border: 1px solid #61616130;
+    border-radius: 5px;
+}
+
 .section-2 {
     margin-top: 50px;
     width: 100%;
@@ -272,4 +281,47 @@ footer {
 
 .section-2__title button:hover {
     opacity: 0.7;
+}
+
+.form-2 .input-row {
+    display: flex;
+    gap: 40px;
+}
+
+.form-2 .input-column {
+    width: calc(50% - 20px);
+}
+
+.section-2__address-form {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 40px;
+    display: none;
+}
+
+.section-2__addresses {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    flex-flow: row wrap;
+}
+
+.address-item {
+    background: #6767671f;
+    padding: 10px 20px;
+    line-height: 3;
+    font-family: sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
+    width: 48%;
+    margin-top: 20px;
+}
+
+.address-item label {
+    font-weight: 600;
+    display: inline-block;
+    width: 30%;
 }

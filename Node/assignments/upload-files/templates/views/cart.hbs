@@ -1,0 +1,27 @@
+{{>page_top}}
+    <div class="checkout-wrapper">
+        <table id="cart-items"></table>
+
+        <div class="checkout-form">
+            <form id="place-order-form" class="form">
+                <div class="input-row">
+                    <label fclass="input-row__label">Billing Address</label>
+                    <select name="billing_address" id="billing_address" autocomplete="off" required>
+                        <option value="">Please Select</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <label class="input-row__label">Shipping Address</label>
+                    <select name="shipping_address" id="shipping_address" autocomplete="off" required>
+                        <option value="">Please Select</option>
+                    </select>
+                </div>
+
+                <div class="button-row">
+                    <button>Place Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{{>page_bottom}}

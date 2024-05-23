@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const hbs = require('hbs');
 const userRouter = require('./routers/user');
+const productRouter = require('./routers/product');
 const commonRouter = require('./routers/common');
 
 const app = express();
@@ -34,6 +35,7 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(userRouter);
+app.use(productRouter);
 app.use(commonRouter);
 
 module.exports = app;

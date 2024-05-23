@@ -1,0 +1,27 @@
+{{>page_top}}
+    <div class="product-view">
+        <div class="product-image">
+            <img src="" id="product-image" height="600" width="600" alt="" />
+        </div>
+
+        <div class="product-content">
+            <h2 id="product-name"></h2>
+            <span id="product-price"></span>
+
+            <div class="product-actions">
+                <form id="add-to-cart">
+                    <input type="hidden" id="max_qty" name="max_qty" value="" />
+                    <input type="hidden" id="product_id" name="product_id" value="{{params.id}}" />
+
+                    <div class="qty">
+                        <span id="decrement">-</span>
+                        <input type="text" id="qty" name="qty" value="1" required readonly />
+                        <span id="increment">+</span>
+                    </div>
+
+                    <button>Add To Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{{>page_bottom}}

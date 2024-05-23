@@ -23,8 +23,20 @@
 
                 <li>
                     <label>Email ID:</label>
-                    <span>{{user.email}}</span>
-                    <span class="edit">edit</span>
+                    <span class="static-email">{{user.email}}</span>
+                    <span class="input-email">
+                        <input id="input-email" value="{{user.email}}" placeholder="Edit Email" />
+                    </span>
+                    <span id="edit-email" class="edit" data-editing="false">
+                        <svg fill="#080" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15px" height="15px" viewBox="0 0 528.899 528.899" xml:space="preserve">
+                            <g>
+                                <path d="M328.883,89.125l107.59,107.589l-272.34,272.34L56.604,361.465L328.883,89.125z M518.113,63.177l-47.981-47.981
+                                    c-18.543-18.543-48.653-18.543-67.259,0l-45.961,45.961l107.59,107.59l53.611-53.611
+                                    C532.495,100.753,532.495,77.559,518.113,63.177z M0.3,512.69c-1.958,8.812,5.998,16.708,14.811,14.565l119.891-29.069
+                                    L27.473,390.597L0.3,512.69z"/>
+                            </g>
+                        </svg>
+                    </span>
                 </li>
             </ul>
         </section>
@@ -35,9 +47,109 @@
                 <button class="section-2__add-address">Add +</button>
             </div>
 
-            <div class="section-2__address-form"></div>
+            <div class="section-2__address-form">
+                <form id="add-address-form" class="form form-2">
+                    <div class="input-row">
+                        <div class="input-column">
+                            <label for="firstname" class="input-row__label">First Name</label>
+                            <input type="text" name="firstname" placeholder="First Name" autocomplete="off" required />
+                        </div>
 
-            <div class="section-2__addresses"></div>
+                        <div class="input-column">
+                            <label for="lastname" class="input-row__label">Last Name</label>
+                            <input type="text" name="lastname" placeholder="Last Name" autocomplete="off" required />
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-column">
+                            <label for="mobile" class="input-row__label">Mobile Number</label>
+                            <input type="number" name="mobile" placeholder="Mobile Number" autocomplete="off" required />
+                        </div>
+
+                        <div class="input-column">
+                            <label for="email" class="input-row__label">Email</label>
+                            <input type="email" name="email" value="{{user.email}}" placeholder="Email" autocomplete="off" required disabled />
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-column">
+                            <label for="address" class="input-row__label">Address</label>
+                            <input type="text" name="address" placeholder="Address" autocomplete="off" required />
+                        </div>
+
+                        <div class="input-column">
+                            <label for="country" class="input-row__label">Country</label>
+                            <select name="country" autocomplete="off" required>
+                                <option value="">Please Select</option>
+                                <option value="India">India</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-column">
+                            <label for="state" class="input-row__label">State</label>
+                            <input type="text" name="state" placeholder="State" autocomplete="off" required />
+                        </div>
+
+                        <div class="input-column">
+                            <label for="city" class="input-row__label">City</label>
+                            <input type="text" name="city" placeholder="City" autocomplete="off" required />
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button>Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            {{#if addresses.length}}
+                <ul class="section-2__addresses">
+                    {{#each addresses}}
+                        <li class="address-item">
+                            <div class="item-row">
+                                <label>Name:</label>
+                                <span>{{firstname}} {{lastname}}</span>
+                            </div>
+
+                            <div class="item-row">
+                                <label>Mobile Number:</label>
+                                <span>{{mobile}}</span>
+                            </div>
+
+                            <div class="item-row">
+                                <label>Email:</label>
+                                <span>{{email}}</span>
+                            </div>
+
+                            <div class="item-row">
+                                <label>Address:</label>
+                                <span>{{address}}, {{state}}, {{city}}, {{country}}</span>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+        </section>
+
+        <section class="section-3">
+            <div class="section-2__title">
+                <h2>Order History</h2>
+            </div>
+
+            <table id="order-history">
+                <tr>
+                    <th>Increment Id</th>
+                    <th>Grand Total</th>
+                    <th>Customer Email</th>
+                    <th>Customer Name</th>
+                    <th>Shipping Address</th>
+                    <th>Action</th>
+                </tr>
+            </table>
         </section>
     </div>
 {{>page_bottom}}
