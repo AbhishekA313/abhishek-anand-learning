@@ -24,7 +24,7 @@ const cartSchema = new mongoose.Schema({
     },
     customer_email: {
         type: String,
-        unique: true,
+        unique: false,
         required: true,
         trim: true,
         lowercase: true,

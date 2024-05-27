@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const sharp = require('sharp');
+// const sharp = require('sharp');
 const puppeteer = require('puppeteer');
 
 const { auth } = require('../middleware/auth');
@@ -12,7 +12,19 @@ const Cart = require('../models/cart');
 const SalesOrder = require('../models/salesOrder');
 const Address = require('../models/address');
 
+// const serviceAccount = require('../../firebase/firebase-connector.json');
+// const firebase = require('firebase');
+
 const router = new express.Router();
+
+// if (!firebase.apps.length) {
+//     firebase.initializeApp({
+//         credential: firebase.credential.cert(serviceAccount)
+//     })
+// }
+
+// const bucketName = process.env.FIREBASE_BUCKET;
+// const bucket = firebase.storage().bucket(bucketName);
 
 router.get('/create-category', auth, (req, res) => {
     res.render('createCategory', {
@@ -31,14 +43,22 @@ router.get('/category/get', async (req, res) => {
     }
 })
 
-router.post('/create-category/add', auth, async (req, res) => {
+router.post('/api/create-category/add', auth, async (req, res) => {
     const category = new Category(req.body);
 
     try {
         await category.save();
-        res.send({ category });
+        res.send({
+            status: true,
+            data: category,
+            message: `${category.category_name} has been created!`
+        });
     } catch (e) {
-        res.status(400).send(e);
+        res.status(500).send({
+            status: false,
+            data: [],
+            message: `Unable to create ${req.body.category_name}`
+        });
     }
 })
 
@@ -63,29 +83,58 @@ const upload = multer({
     }
 })
 
-router.post('/create-product/add', auth, upload.single('product_image'), async (req, res) => {
+router.post('/api/create-product/add', auth, upload.single('product_image'), async (req, res) => {
     const product = new Product(req.body);
+    // console.log(req.body);
 
-    try {
-        const buffer = await sharp(req.file.buffer).resize({
-            width: 600,
-            height: 600
-        }).png().toBuffer();
-        product.product_image = buffer;
+    // const fileUpload = bucket.file(fileName);
 
-        await product.save();
-        res.redirect('/create-product');
-    } catch (e) {
-        res.status(400).send(e);
-    }
+    // await fileUpload.save(req.file.buffer, {
+    //     metadata: {
+    //     contentType: req.file.mimetype,
+    // },
+    // });
+
+    // const url = await fileUpload.getSignedUrl({
+    //     action: 'read',
+    //     expires: '03-01-2500', // Set an appropriate expiration date
+    // });
+    // console.log(url, "___________");
+
+    // try {
+    //     const buffer = await sharp(req.file.buffer).resize({
+    //         width: 600,
+    //         height: 600
+    //     }).png().toBuffer();
+    //     product.product_image = buffer;
+
+    //     await product.save();
+    //     res.send({
+    //         status: true,
+    //         data: product,
+    //         message: `${product.product_name} has been created!`
+    //     });
+    // } catch (e) {
+    //     res.status(500).send({
+    //         status: false,
+    //         data: [],
+    //         message: `Unable to create ${req.body.product_name}`
+    //     });
+    // }
 })
 
-router.post('/product/get', async (req, res) => {
+router.post('/api/product/get', async (req, res) => {
     try {
         const products = await Product.find(req.body);
-        res.send(products);
+        res.send({
+            status: true,
+            data: products
+        });
     } catch (e) {
-        res.status(500).send();
+        res.status(500).send({
+            status: false,
+            data: []
+        });
     }
 })
 

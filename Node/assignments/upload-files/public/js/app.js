@@ -10,8 +10,6 @@ const editEmail = document.getElementById('edit-email');
 const addAddress = document.querySelector('.section-2__add-address');
 const submitAddress = document.querySelector('#add-address-form');
 
-const categoryForm = document.getElementById('category-form');
-const productForm = document.querySelector('product-form');
 const addToCartForm = document.getElementById('add-to-cart');
 
 const decrement = document.getElementById('decrement');
@@ -132,48 +130,14 @@ editEmail && editEmail.addEventListener('click', (e) => {
     }
 })
 
-categoryForm && categoryForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-
-    fetch("/create-category/add", {
-        method: "POST",
-        body: JSON.stringify({
-            category_name: formData.get('category_name'),
-            include_in_menu: formData.get('include_in_menu'),
-            is_active: formData.get('is_active')
-        }),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    })
-    .then((response) => response.json())
-    .then((category) => {
-        if (!category) {
-            return alert('Unable to add category.');
-        }
-        location.href = '/create-category';
-    }).catch(e => {
-        alert('Unable to add category.');
-        console.log(e);
-    });
-})
-
 window.onload = () => {
     const productId = document.getElementById('product_id')?.value || undefined;
     const orderId = document.getElementById('order_id')?.value || undefined;
 
-    if (['/', '/cake', `/product/view/${productId}`].includes(window.location.pathname)) {
+    if ([`/product/view/${productId}`].includes(window.location.pathname)) {
         let payload = {
             availability: 1
         };
-        if (window.location.pathname === '/cake') {
-            payload = {
-                ...payload,
-                category_name: 'Cake'
-            }
-        }
 
         if (window.location.pathname === `/product/view/${productId}`) {
             payload = {
@@ -195,25 +159,7 @@ window.onload = () => {
                 return alert('Unable to find product.');
             }
 
-            if (!productId) {
-                let html = '<ul class="product-list">';
-                products.map(product => {
-                    html += `<li class="item">
-                        <div class="product-image">
-                            <img src="data:image/jpeg;base64,${product.product_image.toString('base64')}" width="250" height="250" alt="${product.product_name}" />
-                        </div>
-
-                        <div class="product-content">
-                            <a href="/product/view/${product._id}">${product.product_name}</a>
-
-                            <span class="price">INR ${product.price}</span>
-                        </div>
-                    </li>`;
-                })
-                html += '</ul>';
-
-                document.getElementById('products').innerHTML = html;
-            } else {
+            if (productId) {
                 const _product = products[0];
                 document.getElementById('product-image').src = `data:image/jpeg;base64,${_product.product_image.toString('base64')}`;
                 document.getElementById('product-name').textContent = _product.product_name;
